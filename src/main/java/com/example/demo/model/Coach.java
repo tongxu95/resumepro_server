@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Convert;
@@ -16,8 +17,16 @@ public class Coach {
 	private String name;
 	
 	private String role;
-
 	
+	@Convert(converter = RatingsConverter.class)
+	private List<Double> ratings;
+
+	private double resumeFee;
+	
+// hibernate require a no arg constructor 
+	public Coach () { }
+
+//	Java provides a default no arg constructor when no explicit constructors are provided
 	public Coach(long id, String name, String role, double resumeFee) {
 		super();
 		this.id = id;
@@ -25,11 +34,6 @@ public class Coach {
 		this.role = role;
 		this.resumeFee = resumeFee;
 	}
-	
-	@Convert(converter = RatingsConverter.class)
-	private List<Double> ratings;
-
-	private double resumeFee;
 	
 	public long getId() {
 		return id;

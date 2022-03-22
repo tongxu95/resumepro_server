@@ -14,14 +14,20 @@ public class RatingsConverter implements AttributeConverter<List<Double>, String
 	
 	@Override
 	public String convertToDatabaseColumn(List<Double> ratingList) {
-		List<String> ratingsListStr = (ratingList != null) ? ratingList.stream().map(rating -> rating.toString()).collect(Collectors.toList()) : null;
-		return ratingsListStr != null ? String.join(SPLIT_CHAR, ratingsListStr) : "";
+		if (ratingList != null) {
+			List<String> ratingsListStr = ratingList.stream().map(rating -> rating.toString()).collect(Collectors.toList());
+			return String.join(SPLIT_CHAR, ratingsListStr);
+		}
+		return "";
 	}
 
 	@Override
 	public List<Double> convertToEntityAttribute(String ratings) {
-		List<String> ratingListStr = (ratings != null) ? Arrays.asList(ratings.split(SPLIT_CHAR)) : null;
-		return (ratingListStr != null) ? ratingListStr.stream().map(rating -> Double.valueOf(rating)).collect(Collectors.toList()) : null;
+		if (! ratings.equals("")) {
+			List<String> ratingListStr = Arrays.asList(ratings.split(SPLIT_CHAR));
+			return ratingListStr.stream().map(rating -> Double.valueOf(rating)).collect(Collectors.toList());
+		}
+		return null;
 	}
 
 }
