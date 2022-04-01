@@ -27,9 +27,8 @@ public class Coach {
 	public Coach () { }
 
 //	Java provides a default no arg constructor when no explicit constructors are provided
-	public Coach(long id, String name, String role, double resumeFee) {
+	public Coach(String name, String role, double resumeFee) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.role = role;
 		this.resumeFee = resumeFee;
