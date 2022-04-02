@@ -1,6 +1,5 @@
 package com.example.demo.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Convert;
@@ -18,6 +17,10 @@ public class Coach {
 	
 	private String role;
 	
+	private String company;
+
+	private String tag;
+	
 	@Convert(converter = RatingsConverter.class)
 	private List<Double> ratings;
 
@@ -27,10 +30,12 @@ public class Coach {
 	public Coach () { }
 
 //	Java provides a default no arg constructor when no explicit constructors are provided
-	public Coach(String name, String role, double resumeFee) {
+	public Coach(String name, String role, String company, String tag, double resumeFee) {
 		super();
 		this.name = name;
 		this.role = role;
+		this.company = company;
+		this.tag = tag;
 		this.resumeFee = resumeFee;
 	}
 	
@@ -64,9 +69,21 @@ public class Coach {
 	public void setResumeFee(double resumeFee) {
 		this.resumeFee = resumeFee;
 	}
+	public String getCompany() {
+		return company;
+	}
+	public void setCompany(String company) {
+		this.company = company;
+	}
+	public String getTag() {
+		return tag;
+	}
+	public void setTag(String tag) {
+		this.tag = tag;
+	}	
 	@Override
 	public String toString() {
 		return "Coach [id=" + id + ", name=" + name + ", role=" + role + ", ratings=" + ratings + ", resumeFee="
 				+ resumeFee + "]";
-	}	
+	}
 }
