@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+src/main/java/com/example/.DS_Store
+.DS_Store
+resumepro_aws.pem

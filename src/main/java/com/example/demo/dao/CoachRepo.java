@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.example.demo.model.Coach;
@@ -13,10 +14,15 @@ import com.example.demo.model.Coach;
 @RepositoryRestResource
 public interface CoachRepo extends JpaRepository <Coach, Long> {
 
-	@Query("select c from Coach c where c.company = ?1")
-	List<Coach> findByCompany(String company);
+	List<Coach> findByCompanyIgnoreCase(String company);
 	
-	@Query("select c from Coach c where c.tag = ?1")
-	List<Coach> findByTag(String tag);
+	List<Coach> findByTagIgnoreCase(String tag);
+	
+	@Query("SELECT DISTINCT(c.tag) FROM Coach c")
+	List<String> getCategories();
+	
+	@Override
+	@RestResource(exported = false)
+	void deleteById(Long aLong);
 	
 }
